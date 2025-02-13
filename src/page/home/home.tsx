@@ -4,6 +4,7 @@ import Layout from "../layout";
 import Previews from "../components/previews";
 import Connects from "../components/connects";
 import PersonalContent from "./personal";
+import Tabs from "./tabs";
 
 const HomePage: FC = () => {
   return (
@@ -15,6 +16,9 @@ const HomePage: FC = () => {
           </div>
           <div className="lg:hidden">
             <Connects />
+          </div>
+          <div>
+            <Tabs />
           </div>
         </div>
       }
