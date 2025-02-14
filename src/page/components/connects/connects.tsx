@@ -1,48 +1,86 @@
+import clsx from "clsx";
 import { FC } from "react";
 
-const Connects: FC = () => {
+const ConnectsCore: FC = () => {
   const connects = [
+    {
+      title: "Call",
+      url: "tel:+919316896458",
+      image: "/img/call.svg",
+    },
+    {
+      title: "Mail",
+      url: "mailto:me@nawaaz.dev",
+      image: "/img/mail.svg",
+    },
     {
       title: "X",
       url: "https://x.com",
+      image: "/img/x.svg",
     },
     {
       title: "Medium",
       url: "https://medium.com",
+      image: "/img/medium.svg",
     },
     {
       title: "UpWork",
       url: "https://upwork.com",
+      image: "/img/upwork.svg",
+      style: {
+        width: "3rem",
+      },
     },
     {
       title: "Fiverr",
       url: "https://fiverr.com",
+      image: "/img/fiverr.svg",
+      style: {
+        width: "3rem",
+      },
     },
     {
       title: "GitHub",
       url: "https://github.comm",
+      image: "/img/github.svg",
     },
     {
       title: "LinkedIn",
       url: "https://linkedin.com",
+      image: "/img/linkedin.svg",
     },
   ];
 
   return (
-    <div className="grid grid-cols-3 gap-4 p-4">
-      {connects.map((connect) => (
-        <a
-          key={connect.title}
-          href={connect.url}
-          target="_blank"
-          rel="noreferrer"
-          className="underline text-sm"
-        >
-          {connect.title}
-        </a>
-      ))}
+    <div className="flex flex-col gap-2 lg:py-4 px-4">
+      <div className="grid grid-cols-3 lg:grid-cols-3 gap-x-4 gap-y-8 justify-center">
+        {connects.map((connect, index) => (
+          <a
+            key={connect.title}
+            href={connect.url}
+            target="_blank"
+            rel="noreferrer"
+            className={clsx(
+              "underline text-sm flex",
+              (() => {
+                const mod = (index + 1) % 3;
+                if (mod === 1) return "justify-start";
+                else if (mod === 2) return "justify-center";
+                else return "justify-end";
+              })()
+            )}
+          >
+            <img
+              src={connect.image}
+              alt={connect.title}
+              className="w-6 h-6"
+              style={connect.style}
+            />
+          </a>
+        ))}
+      </div>
     </div>
   );
 };
 
-export default Connects;
+export default ConnectsCore;

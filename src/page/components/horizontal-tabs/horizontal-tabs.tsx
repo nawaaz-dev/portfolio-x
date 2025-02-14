@@ -119,7 +119,8 @@ const HorizontalTabs: FC<HorizontalTabsProps> = ({
           &gt;
         </button>
       </div>
-      <div className="flex flex-col gap-4 p-2">{tabs[activeIndex].content}</div>
+      <div className="pt-3"></div>
+      <div className="flex flex-col gap-4">{tabs[activeIndex].content}</div>
     </div>
   );
 };

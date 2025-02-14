@@ -14,18 +14,16 @@ const Layout: FC<PropsWithChildren<LayoutProps>> = ({
 }) => {
   return (
     <div className="flex flex-col gap-4 min-h-[100dvh] relative overflow-y-auto">
-      <div className="flex w-full h-full">
-        <div className="hidden xs:flex justify-end flex-grow border">
+      <div className="flex w-full h-full gap-8">
+        <div className="hidden xs:flex justify-end flex-grow border border-gray-500">
           {leftContent || <Nav />}
         </div>
         <div className="flex flex-grow-[2] lg:flex-grow flex-shrink h-full w-full">
-          <div className="flex w-full sm:w-[600px] lg:w-[920px] xl:w-[990px] 2xl:w-[1050px] h-full">
-            <div className="flex-1 border h-full w-full overflow-y-auto">
+          <div className="flex w-full sm:w-[600px] lg:w-[920px] xl:w-[990px] 2xl:w-[1050px] h-full gap-8">
+            <div className="flex-1 border border-gray-500 h-full w-full overflow-y-auto">
               {mainContent}
             </div>
-            <div className="hidden lg:block border w-[350px]">
-              {rightContent}
-            </div>
+            <div className="hidden lg:block w-[350px] mt-1">{rightContent}</div>
           </div>
         </div>
       </div>
