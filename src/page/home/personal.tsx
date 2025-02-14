@@ -25,16 +25,18 @@ const PersonalContent: FC = () => {
             />
           </div>
           <div>
-            <button className="border px-2 py-1 rounded-md">Hire me</button>
+            <button className="border border-gray-700 px-4 py-1 rounded-full">
+              Hire me
+            </button>
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <h2 className="text-md font-extrabold">Nawaaz Kortiwala</h2>
-          <p className="text-sm">
+          <h2 className="text-xl font-extrabold">Nawaaz Kortiwala</h2>
+          <p className="text-md">
             Helping startups build AI-powered web apps | Full-Stack Dev | Open
             for projects
           </p>
-          <p className="text-gray-500">
+          <p className="text-gray-400">
             {[
               "Software developer/Programmer/Software engineer",
               "Indian",

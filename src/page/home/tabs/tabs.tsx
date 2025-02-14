@@ -102,7 +102,7 @@ const Tabs: FC = () => {
     //   content: <div>Tab 6 Content</div>,
     // },
   ];
-  return <HorizontalTabs tabs={tabs} defaultActiveIndex={1} />;
+  return <HorizontalTabs tabs={tabs} defaultActiveIndex={0} />;
 };
 
 export default Tabs;

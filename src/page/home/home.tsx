@@ -14,7 +14,7 @@ const HomePage: FC = () => {
           <div>
             <PersonalContent />
           </div>
-          <div className="lg:hidden px-4 flex flex-col gap-2 mb-4">
+          <div className="lg:hidden px-4 flex flex-col gap-4 mb-8">
             <h3 className="font-bold">Connect</h3>
             <Connects />
           </div>

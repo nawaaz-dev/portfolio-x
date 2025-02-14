@@ -11,7 +11,7 @@ const Card: FC<CardProps> = ({ children, className, title }) => {
     <div
       className={clsx(
         className,
-        "py-3 px-4 border border-gray-500 rounded-lg w-fit"
+        "py-3 px-4 border border-gray-700 rounded-lg w-fit"
       )}
     >
       <h3 className="font-bold">{title}</h3>
