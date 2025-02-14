@@ -79,7 +79,8 @@ const HorizontalTabs: FC<HorizontalTabsProps> = ({
         >
           {tabs.map((tab, index) => {
             const isActive = index === activeIndex;
-            const commonClasses = "flex px-4 py-2 flex-shrink-0 cursor-pointer";
+            const commonClasses =
+              "flex px-4 py-2 flex-grow flex-shrink-0 cursor-pointer";
             const activityWiseClassNames: Record<
               string,
               (index: number) => string

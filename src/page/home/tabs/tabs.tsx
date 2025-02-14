@@ -1,46 +1,14 @@
 import { FC } from "react";
 import HorizontalTabs from "../../components/horizontal-tabs";
 import ExperienceTab from "./experience-tab";
+import TechStackTab from "./tech-stack-tab";
+import { tabConfig } from "./tabs.config";
+import ProjectsTab from "./projects-tab";
+import EducationTab from "./education-tab";
 
 const Tabs: FC = () => {
-  const experiences = [
-    {
-      title: "Frontend Engineer",
-      time: "Jan 2024 - Oct 2024",
-      image: "https://placehold.co/150",
-      company: "Kapstan Infra",
-      location: "Remote (India/USA)",
-      roles: [
-        "💻 Worked on a project that involved building a web application for a client.",
-        "⚛️ Developed the frontend using React, Redux, and TypeScript.",
-        "🔗 Worked with the backend team to integrate the frontend with the backend.",
-      ],
-    },
-    {
-      title: "Software Engineer",
-      time: "Jan 2023 - Oct 2023",
-      image: "https://placehold.co/150",
-      company: "Kapstan Infraa",
-      location: "Remote (India/USA)",
-      roles: [
-        "💻 Worked on a project that involved building a web application for a client.",
-        "⚛️ Developed the frontend using React, Redux, and TypeScript.",
-        "🔗 Worked with the backend team to integrate the frontend with the backend.",
-      ],
-    },
-    {
-      title: "Frontend Engineer",
-      time: "Jan 2022 - Oct 2022",
-      image: "https://placehold.co/150",
-      company: "Kapstan Infraaa",
-      location: "Remote (India/USA)",
-      roles: [
-        "💻 Worked on a project that involved building a web application for a client.",
-        "⚛️ Developed the frontend using React, Redux, and TypeScript.",
-        "🔗 Worked with the backend team to integrate the frontend with the backend.",
-      ],
-    },
-  ];
+  const { experiences, techStacks, projects, education } = tabConfig;
+
   const tabs = [
     {
       title: "Experiences",
@@ -64,26 +32,77 @@ const Tabs: FC = () => {
     },
     {
       title: "Tech Stack",
-      content: <div>Tab 2 Content</div>,
+      content: (
+        <div className="flex flex-col gap-4">
+          {techStacks.map((techStack) => (
+            <TechStackTab
+              key={techStack.title}
+              title={techStack.title}
+              time={techStack.time}
+              speciality={techStack.speciality}
+              image={techStack.image}
+              onLike={() => console.log("Like 2")}
+              onComment={() => console.log("Comment 2")}
+            />
+          ))}
+        </div>
+      ),
     },
     {
       title: "Projects",
-      content: <div>Tab 3 Content</div>,
+      content: (
+        <div className="flex flex-col gap-4">
+          {projects.map((project) => (
+            <ProjectsTab
+              key={project.title}
+              title={project.title}
+              time={project.time}
+              image="https://placehold.co/150"
+              screenshots={project.screenshots}
+              techStack={project.techStack}
+              duration={project.duration}
+              role={project.role}
+              responsibilities={project.responsibilities}
+              link={project.link}
+              onLike={() => console.log("Like 3")}
+              onComment={() => console.log("Comment 3")}
+            />
+          ))}
+        </div>
+      ),
     },
-    {
-      title: "Clients",
-      content: <div>Tab 4 Content</div>,
-    },
+    // {
+    //   title: "Clients",
+    //   content: <div>Tab 4 Content</div>,
+    // },
     {
       title: "Education",
-      content: <div>Tab 5 Content</div>,
+      content: (
+        <div className="flex flex-col gap-4">
+          {education.map((education) => (
+            <EducationTab
+              key={education.title}
+              title={education.title}
+              time={education.time}
+              image="https://placehold.co/150"
+              degree={education.degree}
+              location={education.location}
+              institution={education.institution}
+              description={education.description}
+              duration={education.duration}
+              onLike={() => console.log("Like 4")}
+              onComment={() => console.log("Comment 4")}
+            />
+          ))}
+        </div>
+      ),
     },
-    {
-      title: "Certificates",
-      content: <div>Tab 6 Content</div>,
-    },
+    // {
+    //   title: "Certificates",
+    //   content: <div>Tab 6 Content</div>,
+    // },
   ];
-  return <HorizontalTabs tabs={tabs} />;
+  return <HorizontalTabs tabs={tabs} defaultActiveIndex={1} />;
 };
 
 export default Tabs;
