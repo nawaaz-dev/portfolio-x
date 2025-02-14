@@ -63,12 +63,12 @@ const HorizontalTabs: FC<HorizontalTabsProps> = ({
   return (
     <div className="flex flex-col w-full">
       <div className="flex flex-col w-full relative">
-        <button
+        {/* <button
           className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 p-1"
           onClick={scrollLeftFunc}
         >
           &lt;
-        </button>
+        </button> */}
         <div
           ref={containerRef}
           className="flex w-full overflow-x-auto horizontal-tabs--scrollbar"
@@ -112,12 +112,12 @@ const HorizontalTabs: FC<HorizontalTabsProps> = ({
             );
           })}
         </div>
-        <button
+        {/* <button
           className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 p-1"
           onClick={scrollRightFunc}
         >
           &gt;
-        </button>
+        </button> */}
       </div>
       <div className="pt-3"></div>
       <div className="flex flex-col gap-4">{tabs[activeIndex].content}</div>

@@ -28,7 +28,7 @@ const Layout: FC<PropsWithChildren<LayoutProps>> = ({
           </div>
         </main>
       </div>
-      <div className="flex xs:hidden absolute bottom-0 w-full">
+      <div className="flex xs:hidden absolute bottom-0 w-full z-10">
         {leftContent || <Nav />}
       </div>
     </div>
