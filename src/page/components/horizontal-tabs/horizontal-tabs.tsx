@@ -48,17 +48,17 @@ const HorizontalTabs: FC<HorizontalTabsProps> = ({
     }
   };
 
-  const scrollLeftFunc = () => {
-    if (containerRef.current) {
-      containerRef.current.scrollLeft -= 100; // Adjust the value as needed
-    }
-  };
+  // const scrollLeftFunc = () => {
+  //   if (containerRef.current) {
+  //     containerRef.current.scrollLeft -= 100; // Adjust the value as needed
+  //   }
+  // };
 
-  const scrollRightFunc = () => {
-    if (containerRef.current) {
-      containerRef.current.scrollLeft += 100; // Adjust the value as needed
-    }
-  };
+  // const scrollRightFunc = () => {
+  //   if (containerRef.current) {
+  //     containerRef.current.scrollLeft += 100; // Adjust the value as needed
+  //   }
+  // };
 
   return (
     <div className="flex flex-col w-full">
