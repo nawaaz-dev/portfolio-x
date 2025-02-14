@@ -53,7 +53,7 @@ const ConnectsCore: FC = () => {
 
   return (
     <div className="flex flex-col gap-2 lg:py-4 px-4">
-      <div className="grid grid-cols-3 lg:grid-cols-3 gap-x-4 gap-y-8 justify-center">
+      <div className="flex gap-6 flex-wrap lg:grid lg:grid-cols-3 lg:gap-x-4 lg:gap-y-8 lg:justify-center">
         {connects.map((connect, index) => (
           <a
             key={connect.title}
@@ -64,9 +64,9 @@ const ConnectsCore: FC = () => {
               "underline text-sm flex",
               (() => {
                 const mod = (index + 1) % 3;
-                if (mod === 1) return "justify-start";
-                else if (mod === 2) return "justify-center";
-                else return "justify-end";
+                if (mod === 1) return "lg:justify-start";
+                else if (mod === 2) return "lg:justify-center";
+                else return "lg:justify-end";
               })()
             )}
           >
