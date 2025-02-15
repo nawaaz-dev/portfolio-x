@@ -23,7 +23,7 @@ const Nav: FC = () => {
       <div className="flex xs:flex-col w-full sm:w-[100px] lg:w-[250px] xs:pt-1">
         <Link
           href="/"
-          className="hidden xs:block text-2xl font-bold p-2 xs:p-3"
+          className="hidden xs:block text-2xl text-center font-bold p-2 xs:p-3"
           title="Nawaaz Kortiwala (Dev)"
         >
           <em>NKD</em>

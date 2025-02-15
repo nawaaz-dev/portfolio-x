@@ -16,11 +16,11 @@ const Layout: FC<PropsWithChildren<LayoutProps>> = ({
   return (
     <div className="flex flex-col gap-4 h-[100dvh] relative overflow-y-auto">
       <div className="flex w-full h-full lg:gap-8">
-        <header className="hidden xs:flex justify-end flex-grow-1">
+        <header className="hidden xs:flex justify-end flex-grow">
           {leftContent || <Nav />}
         </header>
-        <main className="flex flex-grow-[1] flex-shrink h-full gap-8 relative overflow-y-auto">
-          <div className="flex-1 border-l border-r h-fit border-gray-700 w-max sm:max-w-[600px] lg:max-w-[920px] xl:max-w-[990px] 2xl:max-w-[1050px] ">
+        <main className="flex flex-grow-[1] md:flex-grow-[2] lg:flex-grow flex-shrink h-full gap-8 relative overflow-y-auto w-full md:w-[600px] lg:w-[920px] xl:w-[990px] 2xl:w-[1050px]">
+          <div className="flex-1 border-l border-r h-fit border-gray-700 max-w-[600px]">
             {mainContent}
           </div>
           <div className="hidden lg:block w-[350px] mt-1 sticky top-0">
