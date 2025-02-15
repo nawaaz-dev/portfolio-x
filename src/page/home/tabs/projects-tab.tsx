@@ -105,7 +105,7 @@ const ProjectsTab: FC<ProjectsTabProps> = ({
         {extraCount > 0 && (
           <button
             onClick={handleImageClick(screenshots[2], 2)}
-            className="w-full flex items-center justify-center bg-gray-200 text-gray-500 rounded-md"
+            className="w-full flex items-center justify-center bg-gray-200 text-text-secondary rounded-md"
           >
             +{extraCount} images
           </button>
@@ -199,7 +199,7 @@ const ProjectsTab: FC<ProjectsTabProps> = ({
                     e.stopPropagation();
                     handlePrevImage();
                   }}
-                  className="absolute -left-8 top-1/2 transform -translate-y-1/2 bg-white text-gray-500 p-1 rounded"
+                  className="absolute -left-8 top-1/2 transform -translate-y-1/2 bg-white text-text-secondary p-1 rounded"
                 >
                   &lt;
                 </button>
@@ -208,7 +208,7 @@ const ProjectsTab: FC<ProjectsTabProps> = ({
                     e.stopPropagation();
                     handleNextImage();
                   }}
-                  className="absolute -right-8 top-1/2 transform -translate-y-1/2 bg-white text-gray-500 p-1 rounded"
+                  className="absolute -right-8 top-1/2 transform -translate-y-1/2 bg-white text-text-secondary p-1 rounded"
                 >
                   &gt;
                 </button>

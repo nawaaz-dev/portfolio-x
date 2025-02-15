@@ -48,18 +48,6 @@ const HorizontalTabs: FC<HorizontalTabsProps> = ({
     }
   };
 
-  // const scrollLeftFunc = () => {
-  //   if (containerRef.current) {
-  //     containerRef.current.scrollLeft -= 100; // Adjust the value as needed
-  //   }
-  // };
-
-  // const scrollRightFunc = () => {
-  //   if (containerRef.current) {
-  //     containerRef.current.scrollLeft += 100; // Adjust the value as needed
-  //   }
-  // };
-
   return (
     <div className="flex flex-col w-full">
       <div className="flex flex-col w-full relative">
@@ -80,17 +68,15 @@ const HorizontalTabs: FC<HorizontalTabsProps> = ({
           {tabs.map((tab, index) => {
             const isActive = index === activeIndex;
             const commonClasses =
-              "flex px-4 py-2 flex-grow flex-shrink-0 cursor-pointer";
+              "flex px-4 py-2 flex-grow flex-shrink-0 justify-center cursor-pointer";
             const activityWiseClassNames: Record<
               string,
               (index: number) => string
             > = {
               true: (index: number) =>
-                "border border-gray-300 font-bold" +
+                "border-b border-primary font-bold" +
                 (index === 0 ? " border-l-0" : ""),
-              false: (index: number) =>
-                "border-t border-b border-gray-500" +
-                (index !== tabs.length - 1 ? " border-r" : ""),
+              false: () => "",
             };
 
             return (

@@ -15,7 +15,7 @@ const Layout: FC<PropsWithChildren<LayoutProps>> = ({
 }) => {
   return (
     <div className="flex flex-col gap-4 h-[100dvh] relative overflow-y-auto">
-      <div className="flex w-full h-full lg:gap-8">
+      <div className="flex w-full h-full">
         <header className="hidden xs:flex justify-end flex-grow">
           {leftContent || <Nav />}
         </header>

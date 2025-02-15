@@ -1,3 +1,5 @@
+import SVG from "@/page/components/svg/svg";
+import globalStyles from "@/page/styles/global";
 import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -12,44 +14,56 @@ const Nav: FC = () => {
       icon: "/img/home.svg",
       link: "/",
     },
-    {
-      title: "About",
-      icon: "/img/info.svg",
-      link: "/about",
-    },
+    // {
+    //   title: "About",
+    //   icon: "/img/info.svg",
+    //   link: "/about",
+    // },
   ];
   return (
-    <div className="flex xs:flex-col w-full items-end dark:bg-[#0a0a0a] border-t xs:border-t-0 border-gray-700 ">
-      <div className="flex xs:flex-col w-full sm:w-[100px] lg:w-[250px] xs:pt-1">
+    <div className="flex xs:flex-col w-[88px] xl:w-[250px] items-end dark:bg-[#0a0a0a] border-t xs:border-t-0 border-gray-700 ">
+      <div className="flex xs:flex-col xs:pt-1">
         <Link
           href="/"
-          className="hidden xs:block text-2xl text-center font-bold p-2 xs:p-3"
+          className="hidden xs:block text-2xl font-bold p-2 xs:p-3"
           title="Nawaaz Kortiwala (Dev)"
         >
           <em>NKD</em>
         </Link>
         {navs.map((nav, index) => {
-          const isActive = path.split("/")[1] === nav.link.split("/")[1];
+          // const isActive = path.split("/")[1] === nav.link.split("/")[1];
           return (
             <Link
               key={index}
               href={nav.link}
-              className="flex justify-center items-center p-3 gap-2 flex-1 xs:flex-auto"
+              className="flex items-center p-3 gap-2 flex-1 xs:flex-auto"
             >
-              <img
+              <SVG
                 src={nav.icon}
                 alt={nav.title}
-                className="w-[26px] h-[26px] cursor-pointer"
-                style={{
-                  filter: isActive
-                    ? "brightness(0) saturate(100%) invert(60%) sepia(20%) saturate(2631%) hue-rotate(3deg) brightness(107%) contrast(104%)"
-                    : "unset",
-                }}
+                className="w-[24px] h-[24px] cursor-pointer"
+                style={
+                  {
+                    // filter: isActive ? globalStyles.primaryFilter : "unset",
+                  }
+                }
+                filterType="white"
+                isActive
               />
+              {/* <img
+                src={nav.icon}
+                alt={nav.title}
+                className="w-[24px] h-[24px] cursor-pointer"
+                style={
+                  {
+                    // filter: isActive ? globalStyles.primaryFilter : "unset",
+                  }
+                }
+              /> */}
               <span
                 className={clsx(
-                  "hidden lg:block text-[20px]",
-                  isActive ? "text-[#FFA500]" : ""
+                  "hidden XL:block text-[20px]"
+                  // isActive ? "text-primary" : ""
                 )}
               >
                 {nav.title}

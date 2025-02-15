@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { FC } from "react";
+import SVG from "../svg/svg";
 
 const ConnectsCore: FC = () => {
   const connects = [
@@ -70,7 +71,7 @@ const ConnectsCore: FC = () => {
               })()
             )}
           >
-            <img
+            <SVG
               src={connect.image}
               alt={connect.title}
               className="w-6 h-6"

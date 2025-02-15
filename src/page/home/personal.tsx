@@ -36,7 +36,7 @@ const PersonalContent: FC = () => {
             Helping startups build AI-powered web apps | Full-Stack Dev | Open
             for projects
           </p>
-          <p className="text-gray-400">
+          <p className="text-text-secondary">
             {[
               "Software developer/Programmer/Software engineer",
               "Indian",
