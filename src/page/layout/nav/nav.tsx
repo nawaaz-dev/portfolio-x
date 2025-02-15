@@ -1,12 +1,12 @@
 import SVG from "@/page/components/svg/svg";
-import globalStyles from "@/page/styles/global";
+// import globalStyles from "@/page/styles/global";
 import clsx from "clsx";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+// import { usePathname } from "next/navigation";
 import { FC } from "react";
 
 const Nav: FC = () => {
-  const path = usePathname();
+  // const path = usePathname();
 
   const navs = [
     {

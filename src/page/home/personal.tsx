@@ -1,4 +1,5 @@
 import { FC, ReactNode } from "react";
+import SVG from "../components/svg/svg";
 
 const PersonalContent: FC = () => {
   return (
@@ -31,7 +32,15 @@ const PersonalContent: FC = () => {
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <h2 className="text-xl font-extrabold">Nawaaz Kortiwala</h2>
+          <h2 className="text-xl font-extrabold flex gap-2 items-center">
+            Nawaaz Kortiwala
+            <SVG
+              src="/img/verified.svg"
+              alt="Verified"
+              className="w-5 h-5"
+              isActive
+            />
+          </h2>
           <p className="text-md">
             Helping startups build AI-powered web apps | Full-Stack Dev | Open
             for projects
