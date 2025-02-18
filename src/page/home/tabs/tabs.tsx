@@ -1,29 +1,81 @@
-import { FC } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import HorizontalTabs from "../../components/horizontal-tabs";
 import ExperienceTab from "./experience-tab";
 import TechStackTab from "./tech-stack-tab";
 import { tabConfig } from "./tabs.config";
 import ProjectsTab from "./projects-tab";
 import EducationTab from "./education-tab";
+import { toast } from "react-toastify";
+import { IPostCommon } from "@nawaaz-dev/portfolio-types";
+import debounce from "lodash.debounce";
 
 const Tabs: FC = () => {
-  const { experiences, techStacks, projects, education } = tabConfig;
+  const { techStacks, projects, education } = tabConfig;
+  const [experiencesData, setExperiencesData] = useState<IPostCommon[]>([]);
+  const [likeLoading, setLikeLoading] = useState(false);
+
+  const handleLike = (data: IPostCommon) => {
+    if (likeLoading) return;
+
+    setLikeLoading(true);
+
+    fetch(`http://localhost:3001/api/posts/${data._id}/like`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        postId: data._id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.error) {
+          console.error(res.error);
+          toast.error("Failed to like the post");
+        }
+        setExperiencesData((prev) =>
+          prev.map((post) => (post._id === data._id ? res.data : post))
+        );
+      })
+      .finally(() => {
+        setLikeLoading(false);
+      });
+  };
+
+  const debouncedHandleLike = useCallback(debounce(handleLike, 500), []);
+
+  useEffect(() => {
+    fetch("http://localhost:3001/api/posts")
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.error) {
+          console.error(res.error);
+          toast.error("Failed to fetch experiences data");
+        }
+        setExperiencesData(res.data || []);
+      });
+  }, []);
+
+  console.log(experiencesData);
 
   const tabs = [
     {
       title: "Experiences",
       content: (
         <div className="flex flex-col gap-4">
-          {experiences.map((experience) => (
+          {experiencesData.map((experience, index) => (
             <ExperienceTab
-              key={experience.company}
+              key={index}
               image="https://placehold.co/150"
               title={experience.title}
               time={experience.time}
-              company={experience.company}
-              location={experience.location}
-              roles={experience.roles}
-              onLike={() => console.log("Like 1")}
+              company={experience.details.company}
+              location={experience.details.location}
+              roles={experience.details.roles}
+              likeCount={experience.actions.likes}
+              commentCount={experience.actions.comments.length}
+              onLike={() => debouncedHandleLike(experience)}
               onComment={() => console.log("Comment 1")}
             />
           ))}
@@ -41,6 +93,8 @@ const Tabs: FC = () => {
               time={techStack.time}
               speciality={techStack.speciality}
               image={techStack.image}
+              likeCount={0}
+              commentCount={0}
               onLike={() => console.log("Like 2")}
               onComment={() => console.log("Comment 2")}
             />
@@ -64,6 +118,8 @@ const Tabs: FC = () => {
               role={project.role}
               responsibilities={project.responsibilities}
               link={project.link}
+              likeCount={0}
+              commentCount={0}
               onLike={() => console.log("Like 3")}
               onComment={() => console.log("Comment 3")}
             />
@@ -90,6 +146,8 @@ const Tabs: FC = () => {
               institution={education.institution}
               description={education.description}
               duration={education.duration}
+              likeCount={0}
+              commentCount={0}
               onLike={() => console.log("Like 4")}
               onComment={() => console.log("Comment 4")}
             />

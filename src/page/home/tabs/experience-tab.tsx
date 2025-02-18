@@ -1,6 +1,6 @@
 import PostCard, { PostCardProps } from "@/page/components/post-card/post-card";
-import { FC, useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
+import { FC } from "react";
+import { ToastContainer } from "react-toastify";
 
 type ExperienceTabProps = Omit<PostCardProps, "description"> & {
   company: string;
@@ -15,9 +15,12 @@ const ExperienceTab: FC<ExperienceTabProps> = ({
   company,
   location,
   roles,
+  likeCount,
+  commentCount,
+  onLike,
+  onComment,
   ...rest
 }) => {
-  const [likes, setLikes] = useState(0);
   return (
     <>
       <PostCard
@@ -47,9 +50,10 @@ const ExperienceTab: FC<ExperienceTabProps> = ({
             </div>
           </div>
         }
-        likeCount={likes}
-        onLike={() => setLikes((prev) => prev + 1)}
-        onComment={() => toast("Comment feature coming soon!")}
+        likeCount={likeCount}
+        commentCount={commentCount}
+        onLike={onLike}
+        onComment={onComment}
       />
       <ToastContainer theme="dark" className={"border-b border-primary"} />
     </>
