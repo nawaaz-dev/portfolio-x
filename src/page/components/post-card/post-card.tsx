@@ -8,7 +8,7 @@ export type PostCardProps = {
   description: ReactNode;
   likeCount: number;
   commentCount: number;
-  onLike: () => void;
+  onLike: (isLiked: boolean) => void;
   onComment: () => void;
   onShare?: () => void;
 };

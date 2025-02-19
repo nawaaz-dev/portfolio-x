@@ -8,6 +8,7 @@ import EducationTab from "./education-tab";
 import { toast } from "react-toastify";
 import { IPostCommon } from "@nawaaz-dev/portfolio-types";
 import debounce from "lodash.debounce";
+import { API_BASE_URL } from "@/config/urls";
 
 const Tabs: FC = () => {
   const { techStacks, projects, education } = tabConfig;
@@ -19,7 +20,7 @@ const Tabs: FC = () => {
 
     setLikeLoading(true);
 
-    fetch(`http://localhost:3001/api/posts/${data._id}/like`, {
+    fetch(`${API_BASE_URL}/posts/${data._id}/like`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -46,7 +47,7 @@ const Tabs: FC = () => {
   const debouncedHandleLike = useCallback(debounce(handleLike, 500), []);
 
   useEffect(() => {
-    fetch("http://localhost:3001/api/posts")
+    fetch(`${API_BASE_URL}/posts`)
       .then((res) => res.json())
       .then((res) => {
         if (res.error) {
