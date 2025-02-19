@@ -6,7 +6,7 @@ import { tabConfig } from "./tabs.config";
 import ProjectsTab from "./projects-tab";
 import EducationTab from "./education-tab";
 import { toast } from "react-toastify";
-import { IPostCommon } from "@nawaaz-dev/portfolio-types";
+import { IPostComment, IPostCommon } from "@nawaaz-dev/portfolio-types";
 import debounce from "lodash.debounce";
 import { API_BASE_URL } from "@/config/urls";
 
@@ -14,6 +14,18 @@ const Tabs: FC = () => {
   const { techStacks, projects, education } = tabConfig;
   const [experiencesData, setExperiencesData] = useState<IPostCommon[]>([]);
   const [likeLoading, setLikeLoading] = useState(false);
+
+  const fetchPosts = () => {
+    fetch(`${API_BASE_URL}/posts`)
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.error) {
+          console.error(res.error);
+          toast.error("Failed to fetch experiences data");
+        }
+        setExperiencesData(res.data || []);
+      });
+  };
 
   const handleLike = (data: IPostCommon) => {
     if (likeLoading) return;
@@ -46,16 +58,38 @@ const Tabs: FC = () => {
 
   const debouncedHandleLike = useCallback(debounce(handleLike, 500), []);
 
-  useEffect(() => {
-    fetch(`${API_BASE_URL}/posts`)
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.error) {
-          console.error(res.error);
-          toast.error("Failed to fetch experiences data");
-        }
-        setExperiencesData(res.data || []);
+  const handleComment =
+    (data: IPostCommon) => async (comment: IPostComment) => {
+      const res = await fetch(`${API_BASE_URL}/posts/${data._id}/comment`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          postId: data._id,
+          comment,
+        }),
       });
+      const res_1 = await res.json();
+      if (res_1.error) {
+        console.error(res_1.error);
+        toast.error("Failed to comment on the post");
+      }
+      fetchPosts();
+    };
+
+  const debouncedHandleComment = useCallback(
+    (data: IPostCommon, promiseResolved: () => void) =>
+      debounce((comment: IPostComment) => {
+        handleComment(data)(comment).then(() => {
+          promiseResolved();
+        });
+      }, 500),
+    []
+  );
+
+  useEffect(() => {
+    fetchPosts();
   }, []);
 
   console.log(experiencesData);
@@ -75,9 +109,13 @@ const Tabs: FC = () => {
               location={experience.details.location}
               roles={experience.details.roles}
               likeCount={experience.actions.likes}
-              commentCount={experience.actions.comments.length}
+              comments={experience.actions.comments}
               onLike={() => debouncedHandleLike(experience)}
-              onComment={() => console.log("Comment 1")}
+              onComment={(comment) => {
+                return new Promise((resolve) => {
+                  return debouncedHandleComment(experience, resolve)(comment);
+                });
+              }}
             />
           ))}
         </div>
@@ -95,9 +133,9 @@ const Tabs: FC = () => {
               speciality={techStack.speciality}
               image={techStack.image}
               likeCount={0}
-              commentCount={0}
+              comments={[]}
               onLike={() => console.log("Like 2")}
-              onComment={() => console.log("Comment 2")}
+              onComment={() => Promise.resolve(console.log("Comment 2"))}
             />
           ))}
         </div>
@@ -120,18 +158,14 @@ const Tabs: FC = () => {
               responsibilities={project.responsibilities}
               link={project.link}
               likeCount={0}
-              commentCount={0}
+              comments={[]}
               onLike={() => console.log("Like 3")}
-              onComment={() => console.log("Comment 3")}
+              onComment={() => Promise.resolve(console.log("Comment 3"))}
             />
           ))}
         </div>
       ),
     },
-    // {
-    //   title: "Clients",
-    //   content: <div>Tab 4 Content</div>,
-    // },
     {
       title: "Education",
       content: (
@@ -148,9 +182,9 @@ const Tabs: FC = () => {
               description={education.description}
               duration={education.duration}
               likeCount={0}
-              commentCount={0}
+              comments={[]}
               onLike={() => console.log("Like 4")}
-              onComment={() => console.log("Comment 4")}
+              onComment={() => Promise.resolve(console.log("Comment 4"))}
             />
           ))}
         </div>

@@ -16,7 +16,7 @@ const ExperienceTab: FC<ExperienceTabProps> = ({
   location,
   roles,
   likeCount,
-  commentCount,
+  comments,
   onLike,
   onComment,
   ...rest
@@ -51,11 +51,11 @@ const ExperienceTab: FC<ExperienceTabProps> = ({
           </div>
         }
         likeCount={likeCount}
-        commentCount={commentCount}
+        comments={comments}
         onLike={onLike}
         onComment={onComment}
       />
-      <ToastContainer theme="dark" className={"border-b border-primary"} />
+      <ToastContainer theme="dark" className={""} />
     </>
   );
 };

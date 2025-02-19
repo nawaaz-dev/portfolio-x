@@ -260,10 +260,10 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@nawaaz-dev/portfolio-types@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@nawaaz-dev/portfolio-types/-/portfolio-types-1.0.2.tgz#b5133e9b325ca1aefedbf1582225e0c431c9ed8f"
-  integrity sha512-6qsFpocO1ksXPkYdlqY9k0jlR4jtv7qkRvw8VIaKZWSdDDhCI0aLXNdQBL5nmR9qPlg6uMpVAf5eJ4qUs9f0Dw==
+"@nawaaz-dev/portfolio-types@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@nawaaz-dev/portfolio-types/-/portfolio-types-1.0.6.tgz#4b13ece9607d2dc3359ea690b7227338cde78d2e"
+  integrity sha512-l8LGutE08nRBf5Y6qdo+90O8r7LdJOTIkldHxZMwj8qoJaGyhlxWZTGC6Tmpo52SL3XeRDGpZPzujkX1VUHMIQ==
 
 "@next/env@15.1.6":
   version "15.1.6"

@@ -1,5 +1,9 @@
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, useState } from "react";
 import SVG from "../svg/svg";
+import Comments, { Comment } from "./comment";
+import { IPostComment } from "@nawaaz-dev/portfolio-types";
+
+export type PostCardComment = Comment;
 
 export type PostCardProps = {
   image: string;
@@ -7,9 +11,9 @@ export type PostCardProps = {
   time: string;
   description: ReactNode;
   likeCount: number;
-  commentCount: number;
+  comments: PostCardComment[];
   onLike: () => void;
-  onComment: () => void;
+  onComment: (comment: IPostComment) => Promise<void>;
   onShare?: () => void;
 };
 
@@ -19,11 +23,17 @@ const PostCard: FC<PostCardProps> = ({
   time,
   description,
   likeCount,
-  commentCount,
+  comments,
   onLike,
   onComment,
   onShare,
 }) => {
+  const [commentsActive, setCommentsActive] = useState(false);
+
+  const handleCommentActionClick = () => {
+    setCommentsActive(!commentsActive);
+  };
+
   return (
     <div className="flex flex-col gap-2 border-b border-gray-600 px-4">
       <div className="flex gap-4">
@@ -38,48 +48,59 @@ const PostCard: FC<PostCardProps> = ({
           </div>
           <div>{description}</div>
           <div className="flex w-full">
-            <button
-              className="flex-1 flex items-center gap-1 h-[36px]"
-              onClick={onLike}
-            >
-              <SVG
-                src={`/img/${!likeCount ? "like" : "liked"}.svg`}
-                alt="Like"
-                className="w-4 h-4"
-                isActive={!!likeCount}
-                filterType="active"
-              />
-              {likeCount > 0 && (
-                <span className="text-sm text-active">{likeCount}</span>
-              )}
-            </button>
-            <button
-              className="flex-1 flex items-center gap-1 h-[36px]"
-              onClick={onComment}
-            >
-              <SVG
-                src="/img/comment.svg"
-                alt="Comment"
-                className="w-4 h-4"
-                isActive={!!commentCount}
-                filterType="active"
-              />
-              {commentCount > 0 && (
-                <span className="text-sm text-active">{commentCount}</span>
-              )}
-            </button>
-            <button
-              className="flex items-center gap-1 h-[36px]"
-              onClick={onShare}
-            >
-              <SVG
-                src="/img/share.svg"
-                alt="Share"
-                className="w-4 h-4"
-                filterType="active"
-              />
-            </button>
+            <div className="flex-1">
+              <button
+                className=" flex w-fit items-center gap-1 h-[36px]"
+                onClick={onLike}
+              >
+                <SVG
+                  src={`/img/${!likeCount ? "like" : "liked"}.svg`}
+                  alt="Like"
+                  className="w-4 h-4"
+                  isActive={!!likeCount}
+                  filterType="active"
+                />
+                {likeCount > 0 && (
+                  <span className="text-sm text-active">{likeCount}</span>
+                )}
+              </button>
+            </div>
+            <div className="flex-1">
+              <button
+                className="w-fit flex items-center gap-1 h-[36px]"
+                onClick={handleCommentActionClick}
+              >
+                <SVG
+                  src="/img/comment.svg"
+                  alt="Comment"
+                  className="w-4 h-4"
+                  isActive={!!comments.length}
+                  filterType="active"
+                />
+                {comments.length > 0 && (
+                  <span className="text-sm text-active">{comments.length}</span>
+                )}
+              </button>
+            </div>
+            <div className="">
+              <button
+                className="w-fit flex items-center gap-1 h-[36px]"
+                onClick={onShare}
+              >
+                <SVG
+                  src="/img/share.svg"
+                  alt="Share"
+                  className="w-4 h-4"
+                  filterType="active"
+                />
+              </button>
+            </div>
           </div>
+          {commentsActive && (
+            <div className="flex w-full">
+              <Comments comments={comments} onComment={onComment} />
+            </div>
+          )}
         </div>
       </div>
     </div>
