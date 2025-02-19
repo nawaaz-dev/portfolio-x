@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@nawaaz-dev/portfolio-types": "^1.0.6",
+    "@nawaaz-dev/portfolio-types": "^1.0.7",
     "@types/lodash.debounce": "^4.0.9",
     "@types/node": "^20",
     "@types/react": "^19",
