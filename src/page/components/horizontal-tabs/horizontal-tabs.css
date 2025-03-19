@@ -1,5 +1,11 @@
 .horizontal-tabs--scrollbar::-webkit-scrollbar {
-  height: 5px;
+  height: 1px;
+}
+
+@media (min-width: 481px) {
+  .horizontal-tabs--scrollbar::-webkit-scrollbar {
+    height: 5px;
+  }
 }
 
 .horizontal-tabs--scrollbar::-webkit-scrollbar-thumb {

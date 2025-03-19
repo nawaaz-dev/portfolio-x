@@ -11,6 +11,10 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^6.4.8",
+    "@mui/material": "^6.4.8",
     "clsx": "^2.1.1",
     "lodash.debounce": "^4.0.8",
     "next": "15.1.6",

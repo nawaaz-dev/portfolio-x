@@ -21,8 +21,8 @@ const Nav: FC = () => {
     // },
   ];
   return (
-    <div className="flex xs:flex-col w-[88px] xl:w-[250px] items-end dark:bg-[#0a0a0a] border-t xs:border-t-0 border-gray-700 ">
-      <div className="flex xs:flex-col xs:pt-1">
+    <div className="flex xs:flex-col w-full xs:w-[88px] xl:w-[250px] items-end dark:bg-[#0a0a0a] border-t xs:border-t-0 border-gray-700 ">
+      <div className="flex xs:flex-col xs:pt-1 w-full justify-between">
         <Link
           href="/"
           className="hidden xs:block text-2xl font-bold p-2 xs:p-3"
@@ -36,7 +36,7 @@ const Nav: FC = () => {
             <Link
               key={index}
               href={nav.link}
-              className="flex items-center p-3 gap-2 flex-1 xs:flex-auto"
+              className="flex items-center justify-center xs:justify-start p-3 gap-2 flex-1 xs:flex-auto"
             >
               <SVG
                 src={nav.icon}

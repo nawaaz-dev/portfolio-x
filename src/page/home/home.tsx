@@ -5,6 +5,7 @@ import Previews from "../components/previews";
 import Connects from "../components/connects";
 import PersonalContent from "./personal";
 import Tabs from "./tabs";
+import "../../styles/globals.css";
 
 const HomePage: FC = () => {
   return (
