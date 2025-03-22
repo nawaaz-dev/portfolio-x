@@ -14,7 +14,7 @@ import {
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { IPostCommon } from "@nawaaz-dev/portfolio-types";
 import { FC, useState } from "react";
-import { TabsEnum } from "@/types/common-types";
+import { TabsEnum } from "@/page/home/home.types";
 import tabsMock from "@/mock/tabs-mock";
 import TabDetailsConfig from "./tab-detail-config";
 import editPageConfig from "./edit-page.config";
@@ -26,9 +26,7 @@ type PostCommon = Omit<IPostCommon, "actions"> & {
 };
 
 const EditPage: FC = () => {
-  const [posts, setPosts] = useState<PostCommon[]>(
-    Object.values(tabsMock).flat()
-  );
+  const [posts] = useState<PostCommon[]>(Object.values(tabsMock).flat());
 
   const CategoryWisePostMap: Record<TabsEnum, PostCommon[]> = posts.reduce(
     (acc, post) => {
@@ -43,7 +41,7 @@ const EditPage: FC = () => {
     {} as Record<TabsEnum, PostCommon[]>
   );
 
-  const addPost = (tab: TabsEnum) => {};
+  // const addPost = (tab: TabsEnum) => {};
 
   return (
     <Stack gap={2}>
@@ -79,7 +77,8 @@ const EditPage: FC = () => {
                             const Component = TabDetailsConfig[tab as TabsEnum];
                             console.log(tab, Component);
                             if (Component) {
-                              return <Component {...post.details} />;
+                              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                              return <Component {...(post.details as any)} />;
                             }
                             return <></>;
                           })()}

@@ -1,4 +1,4 @@
-import { TabsEnum } from "@/types/common-types";
+import { TabsEnum } from "@/page/home/home.types";
 import { Box, Button, Stack, TextField } from "@mui/material";
 import { FC, useState } from "react";
 

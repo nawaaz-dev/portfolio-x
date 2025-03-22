@@ -1,4 +1,4 @@
-import { TabsEnum } from "@/types/common-types";
+import { TabsEnum } from "@/page/home/home.types";
 import { IPostCommon } from "@nawaaz-dev/portfolio-types";
 
 const tabsPrecedence = [
