@@ -33,7 +33,7 @@ const ExperienceTab: FC<ExperienceTabProps> = ({
         time={time}
         description={
           <div className="flex flex-col gap-1">
-            <div className="flex gap-2 text-sm items-center">
+            <div className="grid grid-cols-1 sm:grid-cols-3  gap-2 text-sm items-start">
               <h3 className="">🏢 {company}</h3>
               <p>📍{location}</p>
               {website && (

@@ -56,9 +56,11 @@ const PostCard: FC<PostCardProps> = ({
           <img src={image} alt={title} className="w-10 h-10 rounded-full" />
         </div>
         <div className="flex flex-col gap-2 flex-1 pb-3">
-          <div className="flex gap-1 items-center">
+          <div className="flex flex-col md:flex-row gap-1 md:items-center">
             <div className="font-bold">{title}</div>
-            <span className="text-text-secondary">·</span>{" "}
+            <span className="hidden md:inline-block text-text-secondary">
+              ·
+            </span>{" "}
             <div className="text-text-secondary text-sm">{time}</div>
           </div>
           <div>{description}</div>

@@ -27,8 +27,7 @@ const EducationTab: FC<EducationTabProps> = ({
       time={time}
       description={
         <div className="flex flex-col gap-2">
-          <div className="flex gap-2">
-            <div className="inline-flex gap-2 text-sm"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             <div className="inline-flex gap-2 text-sm">
               <p>🏫 {institution}</p>
             </div>
