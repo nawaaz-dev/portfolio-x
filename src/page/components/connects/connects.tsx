@@ -16,38 +16,38 @@ const ConnectsCore: FC = () => {
     },
     {
       title: "X",
-      url: "https://x.com",
+      url: "https://x.com/nawaazdev",
       image: "/img/x.svg",
     },
     {
       title: "Medium",
-      url: "https://medium.com",
+      url: "https://medium.com/@nawaazkortiwala",
       image: "/img/medium.svg",
     },
     {
       title: "UpWork",
-      url: "https://upwork.com",
+      url: "https://www.upwork.com/freelancers/~01f2d755c14b40b70a",
       image: "/img/upwork.svg",
       style: {
         width: "3rem",
       },
     },
-    {
-      title: "Fiverr",
-      url: "https://fiverr.com",
-      image: "/img/fiverr.svg",
-      style: {
-        width: "3rem",
-      },
-    },
+    // {
+    //   title: "Fiverr",
+    //   url: "https://fiverr.com",
+    //   image: "/img/fiverr.svg",
+    //   style: {
+    //     width: "3rem",
+    //   },
+    // },
     {
       title: "GitHub",
-      url: "https://github.comm",
+      url: "https://github.com/nawaazkortiwala",
       image: "/img/github.svg",
     },
     {
       title: "LinkedIn",
-      url: "https://linkedin.com",
+      url: "https://www.linkedin.com/in/nawaaz-kortiwala/",
       image: "/img/linkedin.svg",
     },
   ];
