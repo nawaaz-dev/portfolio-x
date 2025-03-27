@@ -1,36 +1,34 @@
 import PostCard, { PostCardProps } from "@/page/components/post-card/post-card";
+import Image from "next/image";
 import { FC, MouseEvent, useState, useEffect } from "react";
 
 export type ProjectsTabProps = Omit<PostCardProps, "description"> & {
-  screenshots: string[];
+  position: string;
+  description: string;
   techStack: string[];
-  duration: string;
-  role: string;
   responsibilities: string[];
-  link?: string;
+  images: string[];
+  link: string;
 };
 
 const ProjectsTab: FC<ProjectsTabProps> = ({
+  image,
   title,
   time,
-  screenshots,
+  position,
+  description,
   techStack,
-  duration,
-  role,
   responsibilities,
+  images,
   link,
-  image,
   ...rest
 }) => {
   const [viewImage, setViewImage] = useState<string | null>(null);
-  const [zoom, setZoom] = useState<number>(1);
-  const [sliderOpacity, setSliderOpacity] = useState<number>(1);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
 
   const handleImageClick = (image: string, index: number) => () => {
     setViewImage(image);
     setCurrentImageIndex(index);
-    setZoom(1); // Reset zoom when a new image is clicked
   };
 
   const handleViewerClick = (e: MouseEvent<HTMLDivElement>) => {
@@ -39,29 +37,16 @@ const ProjectsTab: FC<ProjectsTabProps> = ({
     setViewImage(null);
   };
 
-  const handleZoomChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setZoom(parseFloat(e.target.value));
-  };
-
-  const handleMouseEnter = () => {
-    setSliderOpacity(1);
-  };
-
-  const handleMouseLeave = () => {
-    setSliderOpacity(0.5);
-  };
-
   const handleNextImage = () => {
-    const nextIndex = (currentImageIndex + 1) % screenshots.length;
+    const nextIndex = (currentImageIndex + 1) % images.length;
     setCurrentImageIndex(nextIndex);
-    setViewImage(screenshots[nextIndex]);
+    setViewImage(images[nextIndex]);
   };
 
   const handlePrevImage = () => {
-    const prevIndex =
-      (currentImageIndex - 1 + screenshots.length) % screenshots.length;
+    const prevIndex = (currentImageIndex - 1 + images.length) % images.length;
     setCurrentImageIndex(prevIndex);
-    setViewImage(screenshots[prevIndex]);
+    setViewImage(images[prevIndex]);
   };
 
   useEffect(() => {
@@ -82,29 +67,37 @@ const ProjectsTab: FC<ProjectsTabProps> = ({
   }, [viewImage, currentImageIndex]);
 
   const renderScreenshots = () => {
-    const visibleScreenshots = screenshots.slice(0, 2);
-    const extraCount = screenshots.length - 2;
+    if (!images.length) return null;
+
+    const visibleScreenshots = images.slice(0, 2);
+    const extraCount = images.length - 2;
 
     return (
       <div
-        className="grid gap-2"
+        className="grid gap-2 h-24"
         style={{
           gridTemplateColumns: "repeat(3, minmax(0, calc(33.33% - 1rem)))",
           maxWidth: "100%",
         }}
       >
         {visibleScreenshots.map((screenshot, index) => (
-          <button key={index} onClick={handleImageClick(screenshot, index)}>
-            <img
+          <button
+            key={screenshot}
+            onClick={handleImageClick(screenshot, index)}
+            className="position relative"
+          >
+            <Image
               src={screenshot}
               alt={title}
-              className="w-full object-cover rounded-md"
+              layout="fill" // Makes the image fill the container
+              objectFit="cover" // Ensures the image covers the container
+              className="rounded-md"
             />
           </button>
         ))}
         {extraCount > 0 && (
           <button
-            onClick={handleImageClick(screenshots[2], 2)}
+            onClick={handleImageClick(images[2], 2)}
             className="w-full flex items-center justify-center bg-gray-200 text-text-secondary rounded-md"
           >
             +{extraCount} images
@@ -122,19 +115,17 @@ const ProjectsTab: FC<ProjectsTabProps> = ({
       time={time}
       description={
         <div className="flex flex-col gap-2">
-          <div className="grid grid-cols-2">
-            <div className="flex gap-2 text-sm">
-              <h3 className="font-bold">🧑‍💻 Role</h3>
-              <p>{role}</p>
-            </div>
-            <div className="flex gap-2 text-sm">
-              <h3 className="font-bold">⏳ Duration</h3>
-              <p>{duration}</p>
-            </div>
+          <div className="flex flex-col gap-2">
+            <h3 className="font-bold">Description</h3>
+            <p>{description}</p>
+          </div>
+          <div className="flex flex-col mt-2">
+            <h3 className="font-bold">Position</h3>
+            <p>🧑‍💻 {position}</p>
           </div>
           <div className="flex flex-col mt-2">
             <h3 className="font-bold">Tech Stack</h3>
-            <ul className="[&>li]:py-1 [&>li]:ml-3 list-inside text-sm grid grid-cols-2">
+            <ul className="[&>li]:py-1 [&>li]:ml-3 list-inside text-sm grid grid-cols-3">
               {techStack.map((item, index) => (
                 <li key={index}>
                   <span className="relative -left-2">{item}</span>
@@ -157,7 +148,7 @@ const ProjectsTab: FC<ProjectsTabProps> = ({
               href={link}
               target="_blank"
               rel="noreferrer"
-              className="text-blue-500 hover:underline"
+              className="text-primary underline"
             >
               View Project
             </a>
@@ -168,51 +159,101 @@ const ProjectsTab: FC<ProjectsTabProps> = ({
           {/* Allow zooming in and out */}
           {viewImage && (
             <div
-              className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+              className="fixed inset-0 z-50 flex flex-col gap-6 items-center justify-center bg-black bg-opacity-50 h-full w-full"
               onClick={handleViewerClick}
             >
-              <div className="relative">
-                <img
+              <div className="relative flex gap-4 w-full justify-center items-center">
+                {images.length > 1 && (
+                  <button
+                    className="hidden lg:block"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handlePrevImage();
+                    }}
+                  >
+                    <Image
+                      src="/img/left.svg"
+                      alt="Previous"
+                      width={24}
+                      height={24}
+                    />
+                  </button>
+                )}
+                <Image
                   src={viewImage}
                   alt={title}
-                  className="max-w-full max-h-full"
-                  style={{ transform: `scale(${zoom})` }}
+                  sizes="100vw"
+                  style={{
+                    objectFit: "contain",
+                  }}
+                  className="h-auto max-h-[500px] w-[80%] lg:[90%]"
+                  width={500}
+                  height={300}
                 />
-                <div
-                  className="absolute -bottom-8 left-2 right-2 flex justify-center"
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
-                  style={{ opacity: sliderOpacity }}
-                >
-                  <input
-                    type="range"
-                    min="1"
-                    max="3"
-                    step="0.1"
-                    value={zoom}
-                    onChange={handleZoomChange}
-                    className="w-full"
-                  />
-                </div>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handlePrevImage();
-                  }}
-                  className="absolute -left-8 top-1/2 transform -translate-y-1/2 bg-white text-text-secondary p-1 rounded"
-                >
-                  &lt;
-                </button>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleNextImage();
-                  }}
-                  className="absolute -right-8 top-1/2 transform -translate-y-1/2 bg-white text-text-secondary p-1 rounded"
-                >
-                  &gt;
-                </button>
+
+                {images.length > 1 && (
+                  <button
+                    className="hidden lg:block"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleNextImage();
+                    }}
+                  >
+                    <Image
+                      src="/img/right.svg"
+                      alt="Next"
+                      width={24}
+                      height={24}
+                    />
+                  </button>
+                )}
               </div>
+              {images.length > 1 && (
+                <div className="flex gap-8 lg:hidden">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handlePrevImage();
+                    }}
+                  >
+                    <Image
+                      src="/img/left.svg"
+                      alt="Previous"
+                      width={24}
+                      height={24}
+                    />
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleNextImage();
+                    }}
+                  >
+                    <Image
+                      src="/img/right.svg"
+                      alt="Next"
+                      width={24}
+                      height={24}
+                    />
+                  </button>
+                </div>
+              )}
+              {/* <div
+                className="flex justify-center items-center"
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                style={{ opacity: sliderOpacity }}
+              >
+                <input
+                  type="range"
+                  min="1"
+                  max="3"
+                  step="0.1"
+                  value={zoom}
+                  onChange={handleZoomChange}
+                  className="w-full"
+                />
+              </div> */}
             </div>
           )}
         </div>

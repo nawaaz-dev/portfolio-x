@@ -1,18 +1,17 @@
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useMemo, useState } from "react";
 import HorizontalTabs from "../../components/horizontal-tabs";
 import ExperienceTab from "./experience-tab";
 import TechStackTab from "./tech-stack-tab";
-import { tabConfig } from "./tabs.config";
 import ProjectsTab from "./projects-tab";
 import EducationTab from "./education-tab";
 import { toast } from "react-toastify";
 import { IPostComment, IPostCommon } from "@nawaaz-dev/portfolio-types";
 import debounce from "lodash.debounce";
 import { API_BASE_URL } from "@/config/urls";
+import { TabsEnum } from "../home.types";
 
 const Tabs: FC = () => {
-  const { techStacks, projects, education } = tabConfig;
-  const [experiencesData, setExperiencesData] = useState<IPostCommon[]>([]);
+  const [data, setData] = useState<IPostCommon[]>([]);
   const [likeLoading, setLikeLoading] = useState(false);
 
   const fetchPosts = () => {
@@ -23,7 +22,7 @@ const Tabs: FC = () => {
           console.error(res.error);
           toast.error("Failed to fetch experiences data");
         }
-        setExperiencesData(res.data || []);
+        setData(res.data || []);
       });
   };
 
@@ -47,7 +46,7 @@ const Tabs: FC = () => {
           console.error(res.error);
           toast.error("Failed to like the post");
         }
-        setExperiencesData((prev) =>
+        setData((prev) =>
           prev.map((post) => (post._id === data._id ? res.data : post))
         );
       })
@@ -92,21 +91,44 @@ const Tabs: FC = () => {
     fetchPosts();
   }, []);
 
-  console.log(experiencesData);
+  const { experiences, techStacks, projects, educations } = useMemo(() => {
+    const sortByOrder = (a: IPostCommon, b: IPostCommon) => {
+      return a.order - b.order;
+    };
+    const experiences = data
+      .filter((item) => item.tab === TabsEnum.Experience)
+      .sort(sortByOrder);
+    const techStacks = data
+      .filter((item) => item.tab === TabsEnum.TechStack)
+      .sort(sortByOrder);
+    const projects = data
+      .filter((item) => item.tab === TabsEnum.Project)
+      .sort(sortByOrder);
+    const educations = data
+      .filter((item) => item.tab === TabsEnum.Education)
+      .sort(sortByOrder);
+
+    return { experiences, techStacks, projects, educations };
+  }, [data]);
+
+  const detailTime = (time: { start: string; end: string }) => {
+    return `${time.start} - ${time.end}`;
+  };
 
   const tabs = [
     {
       title: "Experiences",
       content: (
         <div className="flex flex-col gap-4">
-          {experiencesData.map((experience, index) => (
+          {experiences.map((experience, index) => (
             <ExperienceTab
               key={index}
-              image="https://placehold.co/150"
+              image={experience.image}
               title={experience.title}
-              time={experience.time}
+              time={detailTime(experience.time)}
               company={experience.details.company}
               location={experience.details.location}
+              website={experience.details.website}
               roles={experience.details.roles}
               likeCount={experience.actions.likes}
               comments={experience.actions.comments}
@@ -129,8 +151,8 @@ const Tabs: FC = () => {
             <TechStackTab
               key={techStack.title}
               title={techStack.title}
-              time={techStack.time}
-              speciality={techStack.speciality}
+              time={detailTime(techStack.time)}
+              skills={techStack.details.skills}
               image={techStack.image}
               likeCount={0}
               comments={[]}
@@ -148,15 +170,15 @@ const Tabs: FC = () => {
           {projects.map((project) => (
             <ProjectsTab
               key={project.title}
+              image={project.image}
               title={project.title}
-              time={project.time}
-              image="https://placehold.co/150"
-              screenshots={project.screenshots}
-              techStack={project.techStack}
-              duration={project.duration}
-              role={project.role}
-              responsibilities={project.responsibilities}
-              link={project.link}
+              time={detailTime(project.time)}
+              link={project.details.link}
+              position={project.details.position}
+              description={project.details.description}
+              techStack={project.details.techStack}
+              responsibilities={project.details.responsibilities}
+              images={project.details.images}
               likeCount={0}
               comments={[]}
               onLike={() => console.log("Like 3")}
@@ -170,17 +192,17 @@ const Tabs: FC = () => {
       title: "Education",
       content: (
         <div className="flex flex-col gap-4">
-          {education.map((education) => (
+          {educations.map((education) => (
             <EducationTab
               key={education.title}
               title={education.title}
-              time={education.time}
-              image="https://placehold.co/150"
-              degree={education.degree}
-              location={education.location}
-              institution={education.institution}
-              description={education.description}
-              duration={education.duration}
+              time={detailTime(education.time)}
+              image={education.image}
+              degree={education.details.degree}
+              location={education.details.location}
+              institution={education.details.institution}
+              description={education.details.description}
+              duration={education.details.duration}
               likeCount={0}
               comments={[]}
               onLike={() => console.log("Like 4")}

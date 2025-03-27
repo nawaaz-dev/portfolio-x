@@ -13,13 +13,12 @@ const EducationTab: FC<EducationTabProps> = ({
   title,
   time,
   image,
-  degree,
   institution,
-  duration,
   location,
   description,
   ...rest
 }) => {
+  console.log(image);
   return (
     <PostCard
       {...rest}
@@ -28,22 +27,13 @@ const EducationTab: FC<EducationTabProps> = ({
       time={time}
       description={
         <div className="flex flex-col gap-2">
-          <div className="grid grid-cols-2 gap-2">
+          <div className="flex gap-2">
+            <div className="inline-flex gap-2 text-sm"></div>
             <div className="inline-flex gap-2 text-sm">
-              <h3 className="font-bold">🎓 Degree</h3>
-              <p>{degree}</p>
+              <p>🏫 {institution}</p>
             </div>
             <div className="inline-flex gap-2 text-sm">
-              <h3 className="font-bold">🏫 Institution</h3>
-              <p>{institution}</p>
-            </div>
-            <div className="inline-flex gap-2 text-sm">
-              <h3 className="font-bold">📅 Duration</h3>
-              <p>{duration}</p>
-            </div>
-            <div className="inline-flex gap-2 text-sm">
-              <h3 className="font-bold">📍 Location</h3>
-              <p>{location}</p>
+              <p>📍 {location}</p>
             </div>
           </div>
           <div className="flex flex-col mt-2">

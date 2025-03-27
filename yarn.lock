@@ -538,10 +538,10 @@
     prop-types "^15.8.1"
     react-is "^19.0.0"
 
-"@nawaaz-dev/portfolio-types@^1.0.8":
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/@nawaaz-dev/portfolio-types/-/portfolio-types-1.0.8.tgz#f3f19944f1ae9a7cf93f4c026cd8a77fa2066f65"
-  integrity sha512-MjS4c8reMPluI/kRJr8yVsS45oOFqYjmmq6udOtTt7j42Wgbo9odOhFv+Vat/AhoeIpwKJ/1paRzAXq/9ZcveA==
+"@nawaaz-dev/portfolio-types@^1.0.10":
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/@nawaaz-dev/portfolio-types/-/portfolio-types-1.0.10.tgz#e48e617fbe6d395f6e6425b23a68497b80ae9d78"
+  integrity sha512-YBbpeuaw48rjOs2DuJpn9F8j41Lo08hGNBX8WlKC2BAB/6YZXkBvpy6vyHWJjGonuc++uyOhLSWLvg4TlwIuxw==
   dependencies:
     mongoose "^8.10.1"
 

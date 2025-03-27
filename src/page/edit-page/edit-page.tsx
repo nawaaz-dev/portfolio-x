@@ -41,8 +41,6 @@ const EditPage: FC = () => {
     {} as Record<TabsEnum, PostCommon[]>
   );
 
-  // const addPost = (tab: TabsEnum) => {};
-
   return (
     <Stack gap={2}>
       {Object.entries(CategoryWisePostMap).map(([tab, posts]) => (

@@ -2,6 +2,7 @@ import { FC, ReactNode, useState } from "react";
 import SVG from "../svg/svg";
 import Comments, { Comment } from "./comment";
 import { IPostComment } from "@nawaaz-dev/portfolio-types";
+import { toast } from "react-toastify";
 
 export type PostCardComment = Comment;
 
@@ -28,10 +29,24 @@ const PostCard: FC<PostCardProps> = ({
   onComment,
   onShare,
 }) => {
-  const [commentsActive, setCommentsActive] = useState(false);
+  const [commentsActive] = useState(false);
 
   const handleCommentActionClick = () => {
-    setCommentsActive(!commentsActive);
+    toast(
+      <div>
+        <strong>Comment </strong> feature coming soon! 🚀
+      </div>
+    );
+    // setCommentsActive(!commentsActive);
+  };
+
+  const handleShareActionClick = () => {
+    toast(
+      <div>
+        <strong>Share </strong> feature coming soon! 🚀
+      </div>
+    );
+    onShare?.();
   };
 
   return (
@@ -41,10 +56,10 @@ const PostCard: FC<PostCardProps> = ({
           <img src={image} alt={title} className="w-10 h-10 rounded-full" />
         </div>
         <div className="flex flex-col gap-2 flex-1 pb-3">
-          <div className="flex gap-1">
+          <div className="flex gap-1 items-center">
             <div className="font-bold">{title}</div>
             <span className="text-text-secondary">·</span>{" "}
-            <div className="text-text-secondary">{time}</div>
+            <div className="text-text-secondary text-sm">{time}</div>
           </div>
           <div>{description}</div>
           <div className="flex w-full">
@@ -74,18 +89,18 @@ const PostCard: FC<PostCardProps> = ({
                   src="/img/comment.svg"
                   alt="Comment"
                   className="w-4 h-4"
-                  isActive={!!comments.length}
+                  // isActive={!!comments.length}
                   filterType="active"
                 />
-                {comments.length > 0 && (
+                {/* {comments.length > 0 && (
                   <span className="text-sm text-active">{comments.length}</span>
-                )}
+                )} */}
               </button>
             </div>
             <div className="">
               <button
                 className="w-fit flex items-center gap-1 h-[36px]"
-                onClick={onShare}
+                onClick={handleShareActionClick}
               >
                 <SVG
                   src="/img/share.svg"

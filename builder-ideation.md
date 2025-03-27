@@ -1,0 +1,5 @@
+- Each Component will export the type definition and the data definition of the data used in it.
+- The data definition will be used to generate the form in the CMS.
+- The type definition will be used to validate the data in the CMS.
+- As the component is stacked in the builder, a configuration object will be created with the sequence of component and their definitions.
+- This configuration will be used to fill the data in the components via forms in the CMS.

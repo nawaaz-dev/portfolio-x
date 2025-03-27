@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 type ExperienceTabProps = Omit<PostCardProps, "description"> & {
   company: string;
   location: string;
+  website: string;
   roles: string[];
 };
 
@@ -14,6 +15,7 @@ const ExperienceTab: FC<ExperienceTabProps> = ({
   image,
   company,
   location,
+  website,
   roles,
   likeCount,
   comments,
@@ -21,6 +23,7 @@ const ExperienceTab: FC<ExperienceTabProps> = ({
   onComment,
   ...rest
 }) => {
+  console.log(website);
   return (
     <>
       <PostCard
@@ -29,16 +32,24 @@ const ExperienceTab: FC<ExperienceTabProps> = ({
         title={title}
         time={time}
         description={
-          <div className="flex flex-col gap-2">
-            <div className="flex gap-2 text-sm">
-              <h3 className="font-bold">🏢 Company Name</h3>
-              <p>{company}</p>
+          <div className="flex flex-col gap-1">
+            <div className="flex gap-2 text-sm items-center">
+              <h3 className="">🏢 {company}</h3>
+              <p>📍{location}</p>
+              {website && (
+                <a href={website} className="underline">
+                  <div className="inline-flex items-center gap-1">
+                    <span>🌐</span>
+                    <span className="underline">
+                      {" "}
+                      {website ? website.split("//")[1].replace(/\/$/, "") : ""}
+                    </span>
+                  </div>
+                </a>
+              )}
             </div>
-            <div className="flex gap-2 text-sm">
-              <h3 className="font-bold">🌍 Location</h3>
-              <p>{location}</p>
-            </div>
-            <div className="flex flex-col mt-2">
+            <div className="flex gap-2 text-sm"></div>
+            <div className="flex flex-col mt-2 text-sm">
               <h3 className="font-bold">Roles and Responsibilities</h3>
               <ul className="[&>li]:py-1 [&>li]:ml-3 list-inside text-sm">
                 {roles.map((role, index) => (
