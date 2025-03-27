@@ -5,6 +5,7 @@ type HorizontalTab = {
   content: ReactNode;
 };
 export type HorizontalTabsProps = {
+  isDataLoading: boolean;
   tabs: HorizontalTab[];
   defaultActiveIndex?: number;
   onTabChange?: (index: number) => void;

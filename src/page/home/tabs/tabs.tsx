@@ -12,9 +12,12 @@ import { TabsEnum } from "../home.types";
 
 const Tabs: FC = () => {
   const [data, setData] = useState<IPostCommon[]>([]);
+  const [isDataLoading, setIsDataLoading] = useState(false);
   const [likeLoading, setLikeLoading] = useState(false);
 
   const fetchPosts = () => {
+    setIsDataLoading(true);
+
     fetch(`${API_BASE_URL}/posts`)
       .then((res) => res.json())
       .then((res) => {
@@ -23,6 +26,9 @@ const Tabs: FC = () => {
           toast.error("Failed to fetch experiences data");
         }
         setData(res.data || []);
+      })
+      .finally(() => {
+        setIsDataLoading(false);
       });
   };
 
@@ -217,7 +223,13 @@ const Tabs: FC = () => {
     //   content: <div>Tab 6 Content</div>,
     // },
   ];
-  return <HorizontalTabs tabs={tabs} defaultActiveIndex={0} />;
+  return (
+    <HorizontalTabs
+      isDataLoading={isDataLoading}
+      tabs={tabs}
+      defaultActiveIndex={0}
+    />
+  );
 };
 
 export default Tabs;

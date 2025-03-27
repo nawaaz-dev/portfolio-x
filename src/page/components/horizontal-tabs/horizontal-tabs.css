@@ -21,3 +21,21 @@
   /* scrollbar-width: thin;
   scrollbar-color: #ffffff #6b7280; */
 }
+
+.loader {
+  border: 4px solid #e5e7eb; /* Light gray */
+  border-top: 4px solid #ffa500; /* Primary color */
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

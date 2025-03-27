@@ -4,6 +4,7 @@ import clsx from "clsx";
 import "./horizontal-tabs.css";
 
 const HorizontalTabs: FC<HorizontalTabsProps> = ({
+  isDataLoading,
   tabs,
   defaultActiveIndex = 0,
   onTabChange,
@@ -48,7 +49,11 @@ const HorizontalTabs: FC<HorizontalTabsProps> = ({
     }
   };
 
-  return (
+  return isDataLoading ? (
+    <div className="flex justify-center items-center py-10 border-t border-b border-gray-700 w-full text-primary">
+      <div className="loader mb-2"></div>
+    </div>
+  ) : (
     <div className="flex flex-col w-full">
       <div className="flex flex-col w-full relative">
         {/* <button
