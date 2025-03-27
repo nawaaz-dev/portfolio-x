@@ -1,0 +1,6 @@
+# Allow all web crawlers to access everything
+User-agent: *
+Allow: /
+
+# Specify the location of the sitemap
+Sitemap: https://nawaaz.dev/sitemap.xml
