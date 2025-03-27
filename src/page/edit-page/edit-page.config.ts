@@ -31,6 +31,12 @@ const postSchemaCommon: Record<
     defaultValue: "",
     title: "Tab",
   },
+  order: {
+    type: "string",
+    required: true,
+    defaultValue: "",
+    title: "Order",
+  },
   title: {
     type: "string",
     required: true,
